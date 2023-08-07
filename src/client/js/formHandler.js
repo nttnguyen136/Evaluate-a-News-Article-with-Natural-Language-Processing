@@ -1,16 +1,29 @@
-function handleSubmit(event) {
-    event.preventDefault()
+async function postData(url, data) {
+  const response = await fetch(url, {
+    method: "POST",
+    credentials: "same-origin",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
-    // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    checkForName(formText)
-
-    console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
-    .then(res => res.json())
-    .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
-    })
+  return await response.json();
 }
 
-export { handleSubmit }
+function handleSubmit(event) {
+  event.preventDefault();
+
+  let urlValue = document.getElementById("url").value;
+
+  console.log("::: Form Submitted :::");
+
+  postData("http://localhost:8088/url", {
+    url: urlValue,
+  }).then((res) => {
+    document.getElementById("results").innerHTML = res.message;
+  });
+}
+
+export { handleSubmit, onBlur };
