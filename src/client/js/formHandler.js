@@ -26,6 +26,12 @@ function handleSubmit(event) {
     url: urlValue,
   }).then((res) => {
     // Get only basic info
+    console.log(res);
+    if (res.status.code == 100) {
+      document.getElementById("error").innerHTML = JSON.stringify(res.status.msg);
+      return;
+    }
+
     const resValue = {
       agreement: res.agreement,
       confidence: res.confidence,
@@ -35,7 +41,12 @@ function handleSubmit(event) {
       subjectivity: res.subjectivity,
     };
 
-    document.getElementById("results").innerHTML = JSON.stringify(resValue);
+    document.getElementById("agreement").innerHTML = `Agreement: ${resValue.agreement}`;
+    document.getElementById("confidence").innerHTML = `Confidence: ${resValue.confidence}`;
+    document.getElementById("irony").innerHTML = `Irony: ${resValue.irony}`;
+    document.getElementById("model").innerHTML = `Model: ${resValue.model}`;
+    document.getElementById("score_tag").innerHTML = `Score Tag: ${resValue.score_tag}`;
+    document.getElementById("subjectivity").innerHTML = `Subjectivity: ${resValue.subjectivity}`;
   });
 }
 
