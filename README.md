@@ -63,7 +63,6 @@ npm run build-dev
 ```
 
 
-
 ### Step 3: Start the project
 ```bash
 // To start the project, using the below command
@@ -71,6 +70,9 @@ npm start
 
 // Or using node-mon for dev environment with below command
 npm run dev
+
+// Run the below command to run test
+npm run test
 ```
 
 Open browser at http://localhost:8081/
